@@ -1,0 +1,19 @@
+CREATE OR REPLACE PROCEDURE EMP_PROC(ENUMBER EMPP.ENO%TYPE,EMPNAME EMPP.ENAME%TYPE)AS
+  2  BEGIN
+  3  INSERT INTO EMPP(ENO,ENAME)VALUES (ENUMBER,EMPNAME);
+  4  END EMP_PROC;
+  5  /
+
+Procedure created.
+
+ BEGIN EMP_PROC(111,'SOBHA');
+  2  END;
+  3  /
+
+PL/SQL procedure successfully completed.
+
+SQL> SELECT * FROM EMPP;
+
+       ENO ENAME
+---------- --------------------
+       111 SOBHA
