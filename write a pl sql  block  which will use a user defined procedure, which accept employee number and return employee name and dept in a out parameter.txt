@@ -1,0 +1,25 @@
+CREATE OR REPLACE PROCEDURE empinfo (
+    v_empid    IN  empp.empid%TYPE,
+    v_empname  OUT empp.empname%TYPE,
+    v_deptname OUT empp.deptname%TYPE
+)
+AS
+BEGIN
+    SELECT empname, deptname
+    INTO v_empname, v_deptname
+    FROM empp
+    WHERE empid = v_empid;
+
+    DBMS_OUTPUT.PUT_LINE('Employee Name : ' || v_empname);
+    DBMS_OUTPUT.PUT_LINE('Department    : ' || v_deptname);
+END empinfo;
+/
+
+
+DECLARE
+    name empp.empname%TYPE;
+    dept empp.deptname%TYPE;
+BEGIN
+    empinfo(101, name, dept);
+END;
+/
