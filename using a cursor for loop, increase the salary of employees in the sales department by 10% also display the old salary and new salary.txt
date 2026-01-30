@@ -1,0 +1,21 @@
+SET SERVEROUTPUT ON;
+
+DECLARE
+       CURSOR emp_cursor IS
+        SELECT empid,
+               department,
+               sal AS old_sal,
+               sal + sal*0.1 AS new_sal
+        FROM emp_trigger23
+        WHERE department = 'HR';
+BEGIN
+        FOR enm IN emp_cursor LOOP
+        4        DBMS_OUTPUT.PUT_LINE(
+            'EmpID: ' || enm.empid ||
+            ' Dept: ' || enm.department ||
+            ' Old Salary: ' || enm.old_sal ||
+            ' New Salary: ' || enm.new_sal
+        );
+    END LOOP;
+END;
+/

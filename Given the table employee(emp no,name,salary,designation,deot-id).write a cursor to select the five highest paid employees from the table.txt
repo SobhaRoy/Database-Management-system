@@ -1,0 +1,18 @@
+set serveroutput on
+declare
+	cursor emp_cursor is
+	select empno,salary from cursor25 order by salary desc;
+	v_name cursor25.name%type;
+	v_salary cursor25.salary%type;
+begin	
+	open emp_cursor;
+	loop
+		fetch emp_cursor into v_name,v_salary;
+		exit when emp_cursor%notfound or 			emp_cursor%rowcount>5;
+		dbms_output.put_line('empname:'||v_name||
+		'salary:'||v_salary);
+	end loop;
+	close emp_cursor;
+end;
+/
+	

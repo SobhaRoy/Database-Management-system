@@ -1,0 +1,15 @@
+set serveroutput on
+declare
+	aff_row number;
+begin
+	update  emp_trigger23 set sal=sal+1000 where sal>=1000;
+	aff_row:=sql%rowcount;
+	if aff_row>0 then
+		dbms_output.put_line('all row update');
+	elsif aff_row = 0 THEN
+		dbms_output.put_line('none updated');
+	else
+		dbms_output.put_line('abc');
+	end if;
+end;
+/
