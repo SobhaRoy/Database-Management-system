@@ -1,0 +1,12 @@
+set serveroutputput on
+declare
+	n number;
+begin
+	n:=&fst_num;
+	if n>0 then
+		dbms_output.put_line('positive');
+	else
+		dbms_output.put_line('negative');
+	end if;
+end;
+/

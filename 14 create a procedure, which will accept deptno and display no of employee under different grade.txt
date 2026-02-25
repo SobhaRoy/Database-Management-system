@@ -1,0 +1,28 @@
+-- Creating the procedure
+CREATE OR REPLACE PROCEDURE emp_count_by_grade(p_deptno IN NUMBER) IS
+BEGIN
+    -- Cursor to fetch count of employees by grade for the given deptno
+    FOR rec IN (
+        SELECT g.grade,
+               COUNT(e.empno) AS emp_count
+        FROM emp e
+        JOIN salgrade g
+          ON e.sal BETWEEN g.losal AND g.hisal
+        WHERE e.deptno = p_deptno
+        GROUP BY g.grade
+        ORDER BY g.grade
+    ) LOOP
+        -- Display the grade and number of employees
+        DBMS_OUTPUT.PUT_LINE('Grade: ' || rec.grade || ' | Employees: ' || rec.emp_count);
+    END LOOP;
+END;
+/
+
+-- Enable DBMS_OUTPUT in SQL*Plus or SQL Developer
+SET SERVEROUTPUT ON;
+
+-- Call the procedure for department 10
+BEGIN
+    emp_count_by_grade(10);
+END;
+/
